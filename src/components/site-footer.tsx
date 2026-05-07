@@ -28,9 +28,9 @@ export function SiteFooter() {
         <div>
           <h4 className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--honey)" }}>Contato</h4>
           <ul className="mt-4 space-y-2 text-sm opacity-80">
-            <li className="flex items-center gap-2"><Phone className="h-3.5 w-3.5" /> (85) 99999-0000</li>
-            <li className="flex items-center gap-2"><Mail className="h-3.5 w-3.5" /> fortaleza@beestore.com.br</li>
-            <li className="flex items-center gap-2"><Instagram className="h-3.5 w-3.5" /> @beestore.fortaleza</li>
+            <li className="flex items-center gap-2"><Phone className="h-3.5 w-3.5" /><span>(85) 99999-0000</span></li>
+            <li className="flex items-center gap-2"><Mail className="h-3.5 w-3.5" /><span className="break-all">fortaleza@beestore.com.br</span></li>
+            <li className="flex items-center gap-2"><Instagram className="h-3.5 w-3.5" /><span>@beestore.fortaleza</span></li>
           </ul>
         </div>
         <div>
