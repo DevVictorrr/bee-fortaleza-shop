@@ -34,7 +34,7 @@ function Index() {
               "radial-gradient(circle at 20% 20%, oklch(0.88 0.18 92 / 0.5), transparent 60%), radial-gradient(circle at 80% 80%, oklch(0.72 0.2 75 / 0.3), transparent 50%)",
           }}
         />
-        <div className="container mx-auto grid gap-12 px-4 py-16 md:py-24 lg:grid-cols-2 lg:items-center">
+        <div className="container mx-auto grid gap-10 px-4 py-12 md:py-24 lg:grid-cols-2 lg:items-center">
           <div>
             <span
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]"
@@ -43,10 +43,10 @@ function Index() {
               <span className="h-2 w-2 rounded-full" style={{ background: "var(--honey-deep)" }} />
               Sede Fortaleza · novidades 2026
             </span>
-            <h1 className="mt-6 text-5xl font-black leading-[1.05] tracking-tight md:text-7xl">
+            <h1 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-7xl">
               Equipamento <span style={{ background: "var(--gradient-honey)", WebkitBackgroundClip: "text", color: "transparent" }}>oficial</span> para quem entrega.
             </h1>
-            <p className="mt-6 max-w-md text-lg text-muted-foreground">
+            <p className="mt-5 max-w-md text-base sm:text-lg text-muted-foreground">
               Bags térmicas, capas, vestuário e acessórios Bee Delivery. Direto da sede Fortaleza para todo o Brasil.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -64,10 +64,10 @@ function Index() {
                 Sobre a sede
               </Link>
             </div>
-            <div className="mt-10 grid grid-cols-3 gap-4 text-xs text-muted-foreground">
-              <div><div className="text-2xl font-black text-foreground">+12k</div>entregadores Bee no CE</div>
-              <div><div className="text-2xl font-black text-foreground">24h</div>despacho em Fortaleza</div>
-              <div><div className="text-2xl font-black text-foreground">5★</div>avaliação dos clientes</div>
+            <div className="mt-8 grid grid-cols-3 gap-3 text-[11px] sm:text-xs text-muted-foreground">
+              <div><div className="text-xl sm:text-2xl font-black text-foreground">+12k</div>entregadores no CE</div>
+              <div><div className="text-xl sm:text-2xl font-black text-foreground">24h</div>despacho em Fortaleza</div>
+              <div><div className="text-xl sm:text-2xl font-black text-foreground">5★</div>avaliação clientes</div>
             </div>
           </div>
           <div className="relative">
@@ -107,16 +107,16 @@ function Index() {
 
       {/* FEATURED */}
       <section className="container mx-auto px-4 py-16">
-        <div className="mb-10 flex items-end justify-between">
+        <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--honey-deep)" }}>Destaques</span>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">Mais pedidos da sede Fortaleza</h2>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-black md:text-4xl">Mais pedidos da sede Fortaleza</h2>
           </div>
           <Link to="/produtos" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all">
             Ver tudo <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {featured.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
@@ -124,7 +124,7 @@ function Index() {
       {/* BENEFITS */}
       <section className="container mx-auto px-4 py-16">
         <div
-          className="grid gap-8 rounded-3xl p-10 md:grid-cols-3"
+          className="grid gap-6 rounded-3xl p-6 sm:p-10 md:grid-cols-3"
           style={{ background: "var(--gradient-dark)", color: "oklch(0.98 0.02 95)" }}
         >
           {[
