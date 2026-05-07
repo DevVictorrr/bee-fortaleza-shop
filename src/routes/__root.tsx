@@ -71,7 +71,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "theme-color", content: "#1a1410" },
+      { name: "mobile-web-app-capable", content: "yes" },
       { title: "Lovable App" },
       { name: "description", content: "Bee Delivery Fortaleza is a website for selling Bee Delivery bags, inspired by iFood's design." },
       { name: "author", content: "Lovable" },
