@@ -44,7 +44,6 @@ export function SiteHeader() {
 
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
           <Link to="/produtos" activeProps={{ className: "text-foreground" }} className="text-muted-foreground hover:text-foreground transition-colors">Produtos</Link>
-          <Link to="/ajuda" className="text-muted-foreground hover:text-foreground transition-colors">Ajuda</Link>
           <Link to="/contato" className="text-muted-foreground hover:text-foreground transition-colors">Contato</Link>
         </nav>
 
@@ -72,7 +71,6 @@ export function SiteHeader() {
             <input placeholder="Buscar produtos..." className="flex-1 bg-transparent text-sm outline-none" />
           </div>
           <Link to="/produtos" onClick={() => setOpen(false)}>Produtos</Link>
-          <Link to="/ajuda" onClick={() => setOpen(false)}>Ajuda</Link>
           <Link to="/contato" onClick={() => setOpen(false)}>Contato</Link>
         </div>
       )}
