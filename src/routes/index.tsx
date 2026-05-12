@@ -36,14 +36,7 @@ function Index() {
         />
         <div className="container mx-auto grid gap-10 px-4 py-12 md:py-24 lg:grid-cols-2 lg:items-center">
           <div>
-            <span
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]"
-              style={{ color: "var(--honey-deep)" }}
-            >
-              <span className="h-2 w-2 rounded-full" style={{ background: "var(--honey-deep)" }} />
-              Sede Fortaleza · novidades 2026
-            </span>
-            <h1 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-7xl">
+            <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-7xl">
               Equipamento <span style={{ background: "var(--gradient-honey)", WebkitBackgroundClip: "text", color: "transparent" }}>oficial</span> para quem entrega.
             </h1>
             <p className="mt-5 max-w-md text-base sm:text-lg text-muted-foreground">
@@ -58,10 +51,10 @@ function Index() {
                 Ver produtos <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/sobre"
+                to="/contato"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted"
               >
-                Sobre a sede
+                Falar com a loja
               </Link>
             </div>
             <div className="mt-8 grid grid-cols-3 gap-3 text-[11px] sm:text-xs text-muted-foreground">
