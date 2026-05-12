@@ -10,9 +10,6 @@ export function SiteHeader() {
       <div className="container mx-auto flex items-center justify-between gap-3 px-4 py-3 sm:py-4">
         <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Bee Delivery Fortaleza">
           <img src={logoBee} alt="Bee Delivery" className="h-9 w-auto sm:h-10" />
-          <span className="hidden sm:inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em]" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
-            Fortaleza
-          </span>
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-xl items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-sm">

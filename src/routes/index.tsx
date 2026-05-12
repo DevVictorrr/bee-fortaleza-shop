@@ -40,7 +40,7 @@ function Index() {
               Equipamento <span style={{ background: "var(--gradient-honey)", WebkitBackgroundClip: "text", color: "transparent" }}>oficial</span> para quem entrega.
             </h1>
             <p className="mt-5 max-w-md text-base sm:text-lg text-muted-foreground">
-              Bags térmicas, capas, vestuário e acessórios Bee Delivery. Direto da sede Fortaleza para todo o Brasil.
+              Bags térmicas, capas, vestuário e acessórios Bee Delivery. Direto da sede Fortaleza.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
