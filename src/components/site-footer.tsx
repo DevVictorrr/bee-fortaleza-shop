@@ -1,16 +1,14 @@
 import { Instagram, Mail, Phone } from "lucide-react";
+import logoBee from "@/assets/logo-bee.png";
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-primary text-primary-foreground">
       <div className="container mx-auto grid gap-10 px-4 py-16 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-xl text-xl" style={{ background: "var(--gradient-honey)", color: "oklch(0.18 0.02 60)" }}>🐝</span>
-            <div>
-              <div className="text-base font-black">Bee Store</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] opacity-70">Fortaleza</div>
-            </div>
+          <div className="flex items-center gap-3">
+            <img src={logoBee} alt="Bee Delivery" className="h-10 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <span className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em]" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>Fortaleza</span>
           </div>
           <p className="mt-4 text-sm opacity-80">
             Loja oficial de bags, capas e vestuário Bee Delivery — sede Fortaleza.
