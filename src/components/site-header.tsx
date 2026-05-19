@@ -136,6 +136,28 @@ export function SiteHeader() {
               <span>{label}</span>
             </Link>
           ))}
+          {user ? (
+            <button
+              onClick={() => { setOpen(false); handleLogout(); }}
+              className="group flex items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors hover:bg-white/10"
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
+                <LogOut className="h-4 w-4" />
+              </span>
+              <span>Sair</span>
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              onClick={() => setOpen(false)}
+              className="group flex items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/10"
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
+                <UserIcon className="h-4 w-4" />
+              </span>
+              <span>Entrar / Cadastrar</span>
+            </Link>
+          )}
         </nav>
 
         <div className="absolute bottom-0 left-0 right-0 px-5 py-6 border-t border-white/10">
