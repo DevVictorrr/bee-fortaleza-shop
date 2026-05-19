@@ -118,31 +118,9 @@ function LoginPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
       <main className="flex-1">
-        <div className="container mx-auto grid gap-10 px-4 py-10 sm:py-16 lg:grid-cols-2 lg:items-center">
-          {/* Brand side */}
-          <div className="hidden lg:flex flex-col gap-6 p-10 rounded-3xl" style={{ background: "var(--gradient-dark)", color: "oklch(0.98 0.02 95)" }}>
-            <img src={logoBee} alt="Bee Delivery" className="h-12 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
-            <h2 className="text-4xl font-bold leading-tight">
-              O time Bee em <span style={{ color: "var(--honey)" }}>Fortaleza</span>.
-            </h2>
-            <p className="text-base opacity-80 max-w-md">
-              Entre na sua conta para acompanhar pedidos, salvar favoritos e receber as novidades direto da nossa sede.
-            </p>
-            <ul className="mt-4 flex flex-col gap-3 text-sm">
-              {["Frete grátis no CE acima de R$ 250", "Suporte direto pelo WhatsApp", "Lançamentos antes de todo mundo"].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <span className="grid h-6 w-6 place-items-center rounded-full" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
-                    <ArrowRight className="h-3 w-3" />
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Form side */}
+        <div className="container mx-auto px-4 py-10 sm:py-16">
           <div className="mx-auto w-full max-w-md">
-            <div className="lg:hidden mb-6 flex flex-col items-center gap-3 text-center">
+            <div className="mb-6 flex flex-col items-center gap-3 text-center">
               <div className="grid place-items-center h-16 w-16 rounded-2xl" style={{ background: "var(--gradient-honey)" }}>
                 <img src={logoBee} alt="" className="h-9 w-auto" />
               </div>
@@ -155,15 +133,6 @@ function LoginPage() {
             </div>
 
             <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-sm">
-              <div className="hidden lg:block mb-6">
-                <h1 className="text-2xl font-bold">
-                  {mode === "signin" ? "Entrar" : "Criar conta"}
-                </h1>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {mode === "signin" ? "Acesse sua conta Bee" : "É rápido e gratuito"}
-                </p>
-              </div>
-
               <div className="grid grid-cols-2 gap-2 p-1 rounded-full bg-secondary mb-6">
                 <button
                   onClick={() => setMode("signin")}
