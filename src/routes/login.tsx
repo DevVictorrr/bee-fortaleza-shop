@@ -69,7 +69,7 @@ function LoginPage() {
           password: parsed.data.password,
           options: {
             emailRedirectTo: `${window.location.origin}/`,
-            data: { display_name: (parsed.data as { name: string }).name },
+            data: { display_name: (parsed.data as unknown as { name: string }).name },
           },
         });
         if (error) throw error;
