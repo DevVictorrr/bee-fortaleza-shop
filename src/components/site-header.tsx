@@ -1,10 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { ShoppingBag, Search, X, Package, Phone, Home } from "lucide-react";
+import { ShoppingBag, Search, X, Package, Phone, Home, User as UserIcon, LogOut } from "lucide-react";
 import { useState } from "react";
 import logoBee from "@/assets/logo-bee.png";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast.success("Você saiu da sua conta");
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="container mx-auto flex items-center justify-between gap-3 px-4 py-3 sm:py-4">
@@ -23,9 +33,26 @@ export function SiteHeader() {
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
           <Link to="/produtos" activeProps={{ className: "text-foreground" }} className="text-muted-foreground hover:text-foreground transition-colors">Produtos</Link>
           <Link to="/contato" className="text-muted-foreground hover:text-foreground transition-colors">Contato</Link>
+          {user ? (
+            <button onClick={handleLogout} className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5">
+              <LogOut className="h-4 w-4" /> Sair
+            </button>
+          ) : (
+            <Link to="/login" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-foreground font-semibold" style={{ background: "var(--gradient-honey)" }}>
+              <UserIcon className="h-4 w-4" /> Entrar
+            </Link>
+          )}
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            to={user ? "/" : "/login"}
+            onClick={user ? handleLogout : undefined}
+            aria-label={user ? "Sair" : "Entrar"}
+            className="lg:hidden relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
+          >
+            {user ? <LogOut className="h-4 w-4" /> : <UserIcon className="h-4 w-4" />}
+          </Link>
           <button
             aria-label="Carrinho"
             className="relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
