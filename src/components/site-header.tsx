@@ -45,14 +45,24 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to={user ? "/" : "/login"}
-            onClick={user ? handleLogout : undefined}
-            aria-label={user ? "Sair" : "Entrar"}
-            className="lg:hidden relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
-          >
-            {user ? <LogOut className="h-4 w-4" /> : <UserIcon className="h-4 w-4" />}
-          </Link>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              aria-label="Sair"
+              className="lg:hidden relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              aria-label="Entrar"
+              className="lg:hidden relative grid h-10 w-10 place-items-center rounded-full text-foreground hover:opacity-90 transition"
+              style={{ background: "var(--gradient-honey)" }}
+            >
+              <UserIcon className="h-4 w-4" />
+            </Link>
+          )}
           <button
             aria-label="Carrinho"
             className="relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
