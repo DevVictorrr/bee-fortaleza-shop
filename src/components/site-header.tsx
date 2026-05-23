@@ -5,10 +5,15 @@ import logoBee from "@/assets/logo-bee.png";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/cart-context";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
+
+const fmt = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
+  const { items, count, total, removeItem, open: cartOpen, setOpen: setCartOpen } = useCart();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -25,6 +30,9 @@ export function SiteHeader() {
         <div className="hidden md:flex flex-1 max-w-xl items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-sm">
           <Search className="h-4 w-4 text-muted-foreground" />
           <input
+            type="search"
+            name="q"
+            aria-label="Buscar produtos"
             placeholder="Buscar bags, capas, vestuário..."
             className="flex-1 bg-transparent text-sm outline-none"
           />
@@ -65,6 +73,7 @@ export function SiteHeader() {
           )}
           <button
             aria-label="Carrinho"
+            onClick={() => setCartOpen(true)}
             className="relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
           >
             <ShoppingBag className="h-4 w-4" />
@@ -72,7 +81,7 @@ export function SiteHeader() {
               className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold"
               style={{ background: "var(--honey-deep)", color: "oklch(0.18 0.02 60)" }}
             >
-              0
+              {count}
             </span>
           </button>
 
@@ -94,7 +103,7 @@ export function SiteHeader() {
               />
               <span
                 className="absolute left-0 right-0 h-[2px] rounded-full bg-foreground transition-all duration-300"
-                style={{ bottom: open ? "auto" : "0", top: open ? "50%" : "auto", transform: open ? "translateY(-50%) -rotate(45deg)" : "none" }}
+                style={{ bottom: open ? "auto" : "0", top: open ? "50%" : "auto", transform: open ? "translateY(-50%) rotate(-45deg)" : "none" }}
               />
             </span>
           </button>
@@ -114,7 +123,7 @@ export function SiteHeader() {
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
           <img src={logoBee} alt="Bee Delivery" className="h-8 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
-          <button onClick={() => setOpen(false)} aria-label="Fechar" className="grid h-9 w-9 place-items-center rounded-full bg-white/10 hover:bg-white/20">
+          <button onClick={() => setOpen(false)} aria-label="Fechar" className="grid h-11 w-11 place-items-center rounded-full bg-white/10 hover:bg-white/20">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -122,7 +131,13 @@ export function SiteHeader() {
         <div className="px-5 py-4">
           <div className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5">
             <Search className="h-4 w-4 opacity-70" />
-            <input placeholder="Buscar produtos..." className="flex-1 bg-transparent text-sm outline-none placeholder:text-white/60" />
+            <input
+              type="search"
+              name="q"
+              aria-label="Buscar produtos"
+              placeholder="Buscar produtos..."
+              className="flex-1 bg-transparent text-sm outline-none placeholder:text-white/60"
+            />
           </div>
         </div>
 
@@ -140,7 +155,7 @@ export function SiteHeader() {
               activeOptions={{ exact: true }}
               activeProps={{ style: { background: "rgba(255,255,255,0.08)" } }}
             >
-              <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
+              <span className="grid h-11 w-11 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
                 <Icon className="h-4 w-4" />
               </span>
               <span>{label}</span>
@@ -151,7 +166,7 @@ export function SiteHeader() {
               onClick={() => { setOpen(false); handleLogout(); }}
               className="group flex items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors hover:bg-white/10"
             >
-              <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
+              <span className="grid h-11 w-11 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
                 <LogOut className="h-4 w-4" />
               </span>
               <span>Sair</span>
@@ -162,7 +177,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="group flex items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/10"
             >
-              <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
+              <span className="grid h-11 w-11 place-items-center rounded-lg" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>
                 <UserIcon className="h-4 w-4" />
               </span>
               <span>Entrar / Cadastrar</span>
@@ -175,6 +190,55 @@ export function SiteHeader() {
           <div className="mt-1 text-sm opacity-90">Frete grátis no CE acima de R$ 250</div>
         </div>
       </aside>
+
+      {/* Cart drawer */}
+      <Sheet open={cartOpen} onOpenChange={setCartOpen}>
+        <SheetContent side="right" className="flex w-full flex-col sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>Seu carrinho ({count})</SheetTitle>
+          </SheetHeader>
+          <div className="flex-1 overflow-y-auto py-4">
+            {items.length === 0 ? (
+              <p className="text-sm text-muted-foreground">Seu carrinho está vazio.</p>
+            ) : (
+              <ul className="space-y-3">
+                {items.map(({ product, qty }) => (
+                  <li key={product.id} className="flex items-center gap-3 rounded-xl border border-border p-3">
+                    <img src={product.image} alt={product.name} className="h-14 w-14 rounded-lg object-cover" />
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate text-sm font-semibold">{product.name}</div>
+                      <div className="text-xs text-muted-foreground">Qtd: {qty}</div>
+                      <div className="text-sm font-bold">{fmt(product.price * qty)}</div>
+                    </div>
+                    <button
+                      onClick={() => removeItem(product.id)}
+                      aria-label={`Remover ${product.name}`}
+                      className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <SheetFooter className="border-t border-border pt-4">
+            <div className="w-full">
+              <div className="mb-3 flex items-center justify-between text-base font-bold">
+                <span>Total</span>
+                <span>{fmt(total)}</span>
+              </div>
+              <button
+                disabled={items.length === 0}
+                className="w-full rounded-full px-6 py-3 text-sm font-bold transition-transform hover:scale-[1.01] disabled:opacity-50"
+                style={{ background: "var(--gradient-honey)", color: "oklch(0.18 0.02 60)" }}
+              >
+                Finalizar compra
+              </button>
+            </div>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 }
