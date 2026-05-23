@@ -1,10 +1,11 @@
 import { Instagram, Mail, Phone } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logoBee from "@/assets/logo-bee.png";
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-primary text-primary-foreground">
-      <div className="container mx-auto grid gap-10 px-4 py-16 md:grid-cols-4">
+      <div className="container mx-auto grid gap-6 px-4 py-10 md:gap-10 md:py-16 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
             <img src={logoBee} alt="Bee Delivery" className="h-10 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
@@ -17,10 +18,10 @@ export function SiteFooter() {
         <div>
           <h4 className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--honey)" }}>Loja</h4>
           <ul className="mt-4 space-y-2 text-sm opacity-80">
-            <li>Bags e Mochilas</li>
-            <li>Capas e Acessórios</li>
-            <li>Vestuário</li>
-            <li>Canecas e Garrafas</li>
+            <li><Link to="/produtos" className="hover:underline">Bags e Mochilas</Link></li>
+            <li><Link to="/produtos" className="hover:underline">Capas e Acessórios</Link></li>
+            <li><Link to="/produtos" className="hover:underline">Vestuário</Link></li>
+            <li><Link to="/produtos" className="hover:underline">Canecas e Garrafas</Link></li>
           </ul>
         </div>
         <div>
@@ -34,8 +35,24 @@ export function SiteFooter() {
         <div>
           <h4 className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--honey)" }}>Receba ofertas</h4>
           <form className="mt-4 flex overflow-hidden rounded-full bg-white/10 p-1">
-            <input placeholder="seu@email.com" className="flex-1 bg-transparent px-4 text-sm outline-none placeholder:text-white/60" />
-            <button className="rounded-full px-4 py-2 text-xs font-bold" style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}>Assinar</button>
+            <label htmlFor="newsletter-email" className="sr-only">E-mail</label>
+            <input
+              id="newsletter-email"
+              type="email"
+              name="email"
+              autoComplete="email"
+              required
+              placeholder="seu@email.com"
+              className="flex-1 bg-transparent px-4 text-sm outline-none placeholder:text-white/60"
+            />
+            <button
+              type="submit"
+              aria-label="Assinar newsletter"
+              className="rounded-full px-4 py-2 text-xs font-bold"
+              style={{ background: "var(--honey)", color: "oklch(0.18 0.02 60)" }}
+            >
+              Assinar
+            </button>
           </form>
         </div>
       </div>
