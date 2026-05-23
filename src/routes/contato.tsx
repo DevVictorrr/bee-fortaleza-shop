@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Phone, Mail, Instagram, MessageCircle } from "lucide-react";
@@ -16,6 +18,14 @@ export const Route = createFileRoute("/contato")({
 });
 
 function ContatoPage() {
+  const [loading, setLoading] = useState(false);
+  const inputCls = "mt-1 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1";
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1200);
+  };
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -43,25 +53,28 @@ function ContatoPage() {
             ))}
           </div>
         </div>
-        <form className="rounded-3xl border border-border bg-card p-6 sm:p-8 space-y-4" onSubmit={(e) => e.preventDefault()}>
+        <form className="rounded-3xl border border-border bg-card p-6 sm:p-8 space-y-4" onSubmit={handleSubmit}>
           <h2 className="text-xl font-black">Envie sua mensagem</h2>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Nome</label>
-            <input className="mt-1 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-foreground" />
+            <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Nome</label>
+            <input id="contact-name" name="name" autoComplete="name" className={inputCls} />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">E-mail</label>
-            <input type="email" className="mt-1 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-foreground" />
+            <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">E-mail</label>
+            <input id="contact-email" name="email" type="email" autoComplete="email" className={inputCls} />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Mensagem</label>
-            <textarea rows={5} className="mt-1 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-foreground" />
+            <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Mensagem</label>
+            <textarea id="contact-message" name="message" rows={5} className={inputCls} />
           </div>
           <button
-            className="w-full rounded-full px-6 py-3 text-sm font-bold transition-transform hover:scale-[1.01]"
+            type="submit"
+            disabled={loading}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-transform hover:scale-[1.01] disabled:opacity-60 disabled:hover:scale-100"
             style={{ background: "var(--gradient-honey)", color: "oklch(0.18 0.02 60)", boxShadow: "var(--shadow-honey)" }}
           >
-            Enviar mensagem
+            {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {loading ? "Enviando..." : "Enviar mensagem"}
           </button>
         </form>
       </section>
