@@ -34,9 +34,9 @@ function Index() {
               "radial-gradient(circle at 20% 20%, oklch(0.88 0.18 92 / 0.5), transparent 60%), radial-gradient(circle at 80% 80%, oklch(0.72 0.2 75 / 0.3), transparent 50%)",
           }}
         />
-        <div className="container mx-auto grid gap-10 px-4 py-12 md:py-24 lg:grid-cols-2 lg:items-center">
+        <div className="container mx-auto grid gap-10 px-4 py-8 md:py-24 lg:grid-cols-2 lg:items-center">
           <div>
-            <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-7xl">
+            <h1 className="text-3xl sm:text-4xl font-black leading-[1.05] tracking-tight md:text-7xl">
               Equipamento <span style={{ background: "var(--gradient-honey)", WebkitBackgroundClip: "text", color: "transparent" }}>oficial</span> para quem entrega.
             </h1>
             <p className="mt-5 max-w-md text-base sm:text-lg text-muted-foreground">
@@ -60,13 +60,13 @@ function Index() {
             <div className="mt-8 grid grid-cols-3 gap-3 text-[11px] sm:text-xs text-muted-foreground">
               <div><div className="text-xl sm:text-2xl font-black text-foreground">+12k</div>entregadores no CE</div>
               <div><div className="text-xl sm:text-2xl font-black text-foreground">24h</div>despacho em Fortaleza</div>
-              <div><div className="text-xl sm:text-2xl font-black text-foreground">5★</div>avaliação clientes</div>
+              <div><div className="text-xl sm:text-2xl font-black text-foreground" aria-label="Avaliação: 5 estrelas">5★</div>avaliação clientes</div>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative hidden sm:block">
             <div
-              className="absolute -inset-6 rounded-[2.5rem] -z-10"
-              style={{ background: "var(--gradient-honey)", filter: "blur(60px)", opacity: 0.5 }}
+              className="absolute -inset-6 rounded-[2.5rem] -z-10 opacity-40"
+              style={{ background: "var(--gradient-honey)" }}
             />
             <img
               src={heroBag}
@@ -105,12 +105,17 @@ function Index() {
             <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--honey-deep)" }}>Destaques</span>
             <h2 className="mt-2 text-2xl sm:text-3xl font-black md:text-4xl">Mais pedidos da sede Fortaleza</h2>
           </div>
-          <Link to="/produtos" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all">
+          <Link to="/produtos" className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all">
             Ver tudo <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {featured.map((p) => <ProductCard key={p.id} product={p} />)}
+        </div>
+        <div className="mt-6 md:hidden text-center">
+          <Link to="/produtos" className="inline-flex items-center gap-2 text-sm font-semibold">
+            Ver todos os produtos <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
