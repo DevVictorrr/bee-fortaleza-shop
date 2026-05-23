@@ -1,9 +1,12 @@
 import type { Product } from "@/lib/products";
 import { ShoppingBag } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { useCart } from "@/contexts/cart-context";
 
 const fmt = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 export function ProductCard({ product }: { product: Product }) {
+  const { addItem } = useCart();
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]">
       {product.badge && (
@@ -14,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.badge}
         </span>
       )}
-      <div className="aspect-square overflow-hidden bg-muted">
+      <Link to="/produtos/$id" params={{ id: product.id }} className="block aspect-square overflow-hidden bg-muted">
         <img
           src={product.image}
           alt={product.name}
@@ -23,23 +26,27 @@ export function ProductCard({ product }: { product: Product }) {
           height={800}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-      </div>
+      </Link>
       <div className="flex flex-1 flex-col gap-2 p-4 sm:gap-3 sm:p-5">
         <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {product.category}
         </span>
-        <h3 className="text-sm sm:text-base font-semibold leading-snug text-foreground line-clamp-2">{product.name}</h3>
+        <h3 className="text-sm sm:text-base font-semibold leading-snug text-foreground line-clamp-2">
+          <Link to="/produtos/$id" params={{ id: product.id }} className="hover:underline">{product.name}</Link>
+        </h3>
         <div className="mt-auto flex items-end justify-between gap-2 pt-2">
           <div>
             {product.oldPrice && (
-              <div className="text-xs text-muted-foreground line-through">{fmt(product.oldPrice)}</div>
+              <div aria-label={`Preço original: ${fmt(product.oldPrice)}`} className="text-xs text-muted-foreground line-through">{fmt(product.oldPrice)}</div>
             )}
-            <div className="text-base sm:text-lg font-black text-foreground">{fmt(product.price)}</div>
+            <div aria-label={`Preço atual: ${fmt(product.price)}`} className="text-base sm:text-lg font-black text-foreground">{fmt(product.price)}</div>
             <div className="text-[10px] sm:text-[11px] text-muted-foreground">
               ou 12x de {fmt(product.price / 12)}
             </div>
           </div>
           <button
+            type="button"
+            onClick={() => addItem(product)}
             aria-label="Adicionar ao carrinho"
             className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-full transition-transform hover:scale-110"
             style={{ background: "var(--gradient-honey)", color: "oklch(0.18 0.02 60)" }}
